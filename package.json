@@ -9,6 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "gulp-html-import": "0.0.2"
+  },
+  "devDependencies": {
+    "gulp-uglify": "^3.0.0"
   }
 }
