@@ -1,3 +1,5 @@
-@import "header.html"
-  <div class="main_content"></div>
-@import "footer.html"
+@@include('./component/header.html',{
+  "title":"测试"
+})
+  <div class="main_content">123</div>
+@@include('./component/footer.html')
