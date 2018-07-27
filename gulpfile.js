@@ -1,25 +1,21 @@
-var    gulp      = require('gulp');
-var    uglify    = require('gulp-uglify');
+var    gulp      = require('gulp')
 var    $         = require('gulp-load-plugins')();
 var    open      = require('open');
 var    runSq     = require('run-sequence');
-var    watch     = require('gulp-watch');
-var    include   = require('gulp-file-include');
-var    clean     = require('gulp-clean');
 var config = {
 root: 'src',
 test: 'test',
 dist: 'dist'
 }
 /*-----------------生产--------------*/
-gulp.task('default')
+gulp.task('default',['include:dist'])
 gulp.task('clean:dist', function () {
   return gulp.src(config.dist)
-    .pipe(clean())
+    .pipe($.clean())
 })
 gulp.task('include:dist',['clean:dist'],function () {
   gulp.src([config.root + '/**/*.html', '!'+config.root+'/component/*.html' ])
-      .pipe(include({
+      .pipe($.fileInclude({
         prefix: '@@',
         basepath: '@file'
       }))
@@ -28,6 +24,10 @@ gulp.task('include:dist',['clean:dist'],function () {
 /*----------------------测试--------------*/
 gulp.task('test',['include:test'], function () {
   runSq('open','watch')
+})
+gulp.task('copy:test',function () {
+  return gulp.src(config.root+"/static/**/*")
+    .pipe(gulp.dest(config.test+"/static"))
 })
 gulp.task('start:server', function() {
   $.connect.server({
@@ -40,21 +40,32 @@ gulp.task("open",['start:server'],function(){
   open('http://localhost:3000')
 });
 gulp.task('clean:test', function () {
-  console.log($);
   return gulp.src(config.test)
-    .pipe(clean())
+    .pipe($.clean())
 })
-gulp.task('include:test',['clean:test'],function () {
-  gulp.src([config.root + '/**/*.html', '!'+config.root+'/component/*.html' ])
-      .pipe(include({
+gulp.task('include:test',['clean:test','copy:test'],function () {
+  gulp.src([config.root + '/**/*.html', '!'+config.root+'/component/*.html', '!'+config.root+'/static/**/*.html' ])
+      .pipe($.fileInclude({
         prefix: '@@',
-        basepath: '@file'
+        basepath: '@file',
+        context: {
+          // csscdn: '//static.orvibo.com/',
+          // jscdn:'//static.orvibo.com/',
+          // encsscdn:"//oscss.orvibo.com/",
+          // enjscdn:"//osjs.orvibo.com/",
+          version:new Date().getTime()
+        }
       }))
       .pipe(gulp.dest(config.test))
 })
 gulp.task('watch',function () {
-  watch([config.root+'/static/**/*', config.root + '/**/*.html'],function() {
+  $.watch(config.root + '/**/*.html',function() {
     runSq('include:test',function(){  
+      $.connect.reload()
+    })
+  })
+  $.watch(config.root + '/static/**/*', function () {
+    runSq('copy:test',function () {
       $.connect.reload()
     })
   })
