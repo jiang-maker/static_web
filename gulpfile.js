@@ -22,12 +22,12 @@ gulp.task('include:dist',['clean:dist'],function () {
       .pipe(gulp.dest(config.dist))
 })
 /*----------------------测试--------------*/
-gulp.task('test',['include:test'], function () {
+gulp.task('test',['include:test','copy:test'], function () {
   runSq('open','watch')
 })
 gulp.task('copy:test',function () {
   return gulp.src(config.root+"/static/**/*")
-    .pipe(gulp.dest(config.test+"/static"))
+    .pipe(gulp.dest(config.test+"/static/"))
 })
 gulp.task('start:server', function() {
   $.connect.server({
@@ -43,7 +43,7 @@ gulp.task('clean:test', function () {
   return gulp.src(config.test)
     .pipe($.clean())
 })
-gulp.task('include:test',['clean:test','copy:test'],function () {
+gulp.task('include:test',function () {
   gulp.src([config.root + '/**/*.html', '!'+config.root+'/component/*.html', '!'+config.root+'/static/**/*.html' ])
       .pipe($.fileInclude({
         prefix: '@@',
