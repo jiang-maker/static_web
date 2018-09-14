@@ -49,10 +49,6 @@ gulp.task('include:test',function () {
         prefix: '@@',
         basepath: '@file',
         context: {
-          // csscdn: '//static.orvibo.com/',
-          // jscdn:'//static.orvibo.com/',
-          // encsscdn:"//oscss.orvibo.com/",
-          // enjscdn:"//osjs.orvibo.com/",
           version:new Date().getTime()
         }
       }))
