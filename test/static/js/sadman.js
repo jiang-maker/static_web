@@ -11,12 +11,12 @@ const canvas = {
     this.resizeCallback = callback
   },
   resize () {
-    this.width = this.ele.width = window.innerWidth * 2
-    this.height = this.ele.height = window.innerHeight * 2
-    this.ele.style.width = this.ele.width * 0.5 + 'px'
-    this.ele.style.height = this.ele.height * 0.5  + 'px'
+    this.width = this.ele.width = $(window).width() 
+    this.height = this.ele.height = $(window).height() 
+    this.ele.style.width = this.ele.width  + 'px'
+    this.ele.style.height = this.ele.height   + 'px'
     this.ctx = this.ele.getContext('2d')
-    this.ctx.scale(2, 2)
+    // this.ctx.scale(2, 2)
     this.resizeCallback && this.resizeCallback()
   },
   run (callback) {
@@ -92,7 +92,7 @@ class SadMan {
     t = t % Math.PI * 2
     ctx.fillStyle = 'white'
     ctx.save()
-    ctx.translate(window.innerWidth * 0.5 - 140, window.innerHeight * 0.5 - 80)
+    ctx.translate($(window).width() * 0.5 - 140, $(window).height() * 0.5 - 80)
     this.drawShadow(t)
     this.drawHead(t)
     this.drawBody(t)
@@ -104,7 +104,6 @@ class SadMan {
 const init = () => {
   objects = []
   objects.push(new SadMan())
-  // objects.push(new Feet())
 }
 
 document.addEventListener('click', () => {

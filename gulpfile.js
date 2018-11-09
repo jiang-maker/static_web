@@ -1,12 +1,13 @@
-var    gulp      = require('gulp')
-var    $         = require('gulp-load-plugins')();
-var    open      = require('open');
-var    runSq     = require('run-sequence');
+var    gulp         = require('gulp')
+var    $            = require('gulp-load-plugins')();
+var    runSq        = require('run-sequence');
+var    browserSync  = require('browser-sync');
 var config = {
 root: 'src',
 test: 'test',
 dist: 'dist'
 }
+
 /*-----------------生产--------------*/
 gulp.task('default',['include:dist'])
 gulp.task('clean:dist', function () {
@@ -21,24 +22,15 @@ gulp.task('include:dist',['clean:dist'],function () {
       }))
       .pipe(gulp.dest(config.dist))
 })
-/*----------------------测试--------------*/
+
+/*---------------------本地开发测试--------------*/
 gulp.task('test',['include:test','copy:test'], function () {
-  runSq('open','watch')
+  runSq('browser-sync','watch')
 })
 gulp.task('copy:test',function () {
   return gulp.src(config.root+"/static/**/*")
     .pipe(gulp.dest(config.test+"/static/"))
 })
-gulp.task('start:server', function() {
-  $.connect.server({
-      root: config.test,
-      livereload: true,
-      port: 3000,
-  });
-});
-gulp.task("open",['start:server'],function(){
-  open('http://localhost:3000')
-});
 gulp.task('clean:test', function () {
   return gulp.src(config.test)
     .pipe($.clean())
@@ -57,12 +49,22 @@ gulp.task('include:test',function () {
 gulp.task('watch',function () {
   $.watch(config.root + '/**/*.html',function() {
     runSq('include:test',function(){  
-      $.connect.reload()
+      browserSync.reload();
     })
   })
   $.watch(config.root + '/static/**/*', function () {
     runSq('copy:test',function () {
-      $.connect.reload()
+      browserSync.reload();
     })
   })
 })
+gulp.task('browser-sync', function () {
+  browserSync.init({
+      files:['**'],
+      server:{
+          baseDir:'./test',  // 设置服务器的根目录
+          index:'index.html' // 指定默认打开的文件
+      },
+      port:8090  // 指定访问服务器的端口号
+  });
+});
