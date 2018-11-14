@@ -1,0 +1,98 @@
+.mix{
+  width: 100%;
+  height: 960px;
+  background: #ffffff;
+  .content{
+    width: 1200px;
+    height: 566px;
+    margin: 338px auto 0;
+    position: relative;
+    img{
+      width: auto;
+      height: 566px;
+      transition: all 0.2s ease;
+    }
+    .pic1{
+      position: absolute;
+      left: 171px;
+      top: 0;
+    }
+    .pic2{
+      position: absolute;
+      left: 364px;
+      top: 0;
+    }
+    .pic3{
+      position: absolute;
+      left: 474px;
+      top: 0;
+    }
+    .pic4{
+      position: absolute;
+      left: 566px;
+      top: 0;
+    }
+    .pic5{
+      position: absolute;
+      left: 703px;
+      top: 0;
+    }
+    .pic6{
+      position: absolute;
+      left: 849px;
+      top: 0;
+    }
+    .active{
+      left: 260px;
+    }
+  }
+}
+.mix2{
+  width: 100%;
+  height: 10.8em;
+  background: url('/static/pc/images/mix/7.jpg') no-repeat center center;
+  background-size: cover;
+  position: relative;
+  .mix2-container{
+    width: 12em;
+    height: 100%;
+    margin: 0 auto;
+  }
+  img{
+    // position: absolute;
+    // left: 5.72em;
+    // top: 1.3em;
+    margin-top: 1.3em;
+    margin-left: 4.3em;
+    width: 7.19em;
+    height: 5.8em;
+    opacity: 0;
+  }
+}
+.animate{
+  animation:fadeInRight 1s 2s ease both;
+  -webkit-animation:fadeInRight 1s 2s ease both;
+  -moz-animation:fadeInRight 1s 2s ease both;
+}
+  @keyframes fadeInRight{
+  0%{
+    opacity:0;
+    -webkit-transform:translateX(60px);
+  }
+  100%{
+    opacity:1;
+    -webkit-transform:translateX(0);
+  }
+  }
+  // @-webkit-keyframes fadeInRight{
+  // 0%{opacity:0;
+  // -webkit-transform:translateX(20px)}
+  // 100%{opacity:1;
+  // -webkit-transform:translateX(0)}
+  // }
+  // @-moz-keyframes fadeInRight{
+  // 0%{opacity:0;
+  // -moz-transform:translateX(20px)}
+  // 100%{opacity:1;
+  // -moz-transform:translateX(0)}
+  // }

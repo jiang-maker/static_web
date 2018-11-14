@@ -4,12 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": " gulp less:dist --env product",
+    "build:test": " gulp less:dist --env test",
     "dev": "gulp test"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "gulp-less": "^4.0.1",
+    "minimist": "^1.2.0"
+  },
   "devDependencies": {
     "browser-sync": "^2.26.3",
     "gulp": "^3.9.1",

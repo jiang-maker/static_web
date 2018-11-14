@@ -1,0 +1,58 @@
+@@include('../../component/header.html',{
+  "seo":{
+    "title":"mix"
+  },
+  "cssurl":["../../static/bower_components/bootstrap/dist/css/bootstrap.min.css","../../static/pc/css/global.css","../../static/pc/css/mix.css"]
+})
+<div class="body_content">
+  <div class="mix">
+    <div class="content">
+      <img src="../../static/pc/images/mix/1.png" alt="" class="pic1">
+      <img src="../../static/pc/images/mix/2.png" alt="" class="pic2">
+      <img src="../../static/pc/images/mix/3.png" alt="" class="pic3">
+      <img src="../../static/pc/images/mix/4.png" alt="" class="pic4">
+      <img src="../../static/pc/images/mix/5.png" alt="" class="pic5">
+      <img src="../../static/pc/images/mix/6.png" alt="" class="pic6">
+    </div>
+  </div>
+  <div class="mix2">
+    <div class="mix2-container">
+      <img src="/static/pc/images/mix/8.png" alt="">
+    </div>
+  </div>
+</div>
+@@include('../../component/footer.html',{
+  "jsurl":["../../static/bower_components/jquery/dist/jquery.min.js","../../static/bower_components/bootstrap/dist/js/bootstrap.min.js","../../static/pc/js/global.js"]
+})
+<script>
+  !(function ($) {
+    $(document).ready(function () {
+      var em = document.documentElement.clientWidth / 19.2 + 'px'
+      $('.body_content').css({
+        'font-size': em
+      })
+      $(window).resize(function () {
+        var em = document.documentElement.clientWidth / 19.2 + 'px'
+        $('.body_content').css({
+          'font-size': em
+        })
+      })
+    })
+    $('.pic1').mouseover(function () {
+      $('.mix .content img').addClass('active')
+    })
+    $(window).scroll(function () {
+      var current = $(document).scrollTop()
+      //第九屏距顶部的距离
+      var top = $('.mix2').offset().top
+      if (!$('.mix2 .mix2-container img').hasClass('animate')) {
+        if (current >= top - 300) {
+        console.log('object');
+          $('.mix2 .mix2-container img').addClass('animate')
+        }
+      }
+    })
+  })(jQuery)
+</script>
+</body>
+</html>
