@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>可缩放页面，采用em布局，适配所有页面</title>
+  <script>
+    function ready(fn){  
+      if (document.addEventListener) {
+        //标准浏览器  
+        document.addEventListener('DOMContentLoaded', function () {
+        //注销事件，避免反复触发  
+        document.removeEventListener('DOMContentLoaded', arguments.callee, false);
+        //执行函数   
+          fn();
+        }, false);
+      } else if (document.attachEvent) {
+        //IE浏览器  
+        document.attachEvent('onreadystatechange', function () {
+          if (document.readyState == 'complete') {
+            document.detachEvent('onreadystatechange', arguments.callee);
+            //执行函数   
+            fn();
+          }
+        });
+      }
+    }
+    ready(function(){
+      var em = document.documentElement.clientWidth / 19.2 + 'px'
+      var b = document.getElementsByClassName('body_content')[0]
+      b.style.fontSize = em;
+      window.onresize = function () {
+        var em = document.documentElement.clientWidth / 19.2 + 'px'
+        document.getElementsByClassName('body_content')[0].style.fontSize = em;
+      }
+    })
+  </script>
+  <style>
+    .block1{
+      width: 100%;
+      height: 10.8em;
+      background: url('/static/pc/images/index_bg.jpg') no-repeat center center;
+      background-size: cover;
+    }
+    .block1 h1{
+      padding-top: 5em; /* 以当前的font-size 为基准，计算类似margin、padding等边距问题，如距顶部240px，字体为48px,转换为距顶部距离，即240/48为5em;*/
+      font-size: 0.48em;
+      font-weight: 900;
+      color: #111111;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="body_content">
+    <section class="block1">
+      <h1>可缩放布局页面</h1>
+    </section>
+  </div>
+</body>
+</html>
