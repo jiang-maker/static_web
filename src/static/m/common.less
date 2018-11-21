@@ -1,0 +1,44 @@
+
+.clear {
+  *zoom: 1;
+}
+.clear:after {
+  display: block;
+  clear: both;
+  content: '\0020';
+  visibility: hidden;
+  height: 0;
+}
+.float-left{
+  float: left;
+}
+.float-right{
+  float: right;
+}
+
+/**
+*   center ele for unknowned size 
+*/
+.center-unknown{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(50%,50%)
+}
+
+/**
+*   center text box 
+*/
+.center-text {
+  text-align: center;
+}
+/**
+*   center for horizon
+*/
+.center-block {
+  margin: 0 auto;
+}
+@import './mixins.less';
+.test{
+  .border-radius(6px)
+}
