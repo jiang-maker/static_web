@@ -5,210 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>video封装模拟</title>
-    <link
-      rel="stylesheet"
-      href="/static/bower_components/video.js/dist/video-js.css"
-    />
+    <link rel="stylesheet" type="text/css" href="/static/bower_components/video.js/dist/video-js.css" />
+    <link rel="stylesheet" type="text/css" href="/static/pc/css/pc-video.css" />
     <style>
       * {
         margin: 0;
         padding: 0;
       }
-      #content {
-        position: relative;
-      }
-      .controls_wrap {
-        position: absolute;
-        bottom: 4px;
-        left: 0;
-        width: 100%;
-        padding-bottom: 30px;
-        background: url('/static/pc/images/video/control_mask.png') repeat;
-        background-size: cover;
-      }
-      .main_controls {
-        margin: 0 auto;
-        width: 812px;
-        height: 30px;
-        position: relative;
-      }
-      .play {
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-      .play button {
-        width: 18px;
-        height: 22px;
-        background: url('/static/pc/images/video/img.png') no-repeat center;
-        background-size: cover;
-        background-position: 0 0;
-        margin-top: 4px;
-        border: none;
-        cursor: pointer;
-      }
-      .play button:focus {
-        outline: 0;
-      }
-      .time {
-        position: absolute;
-        left: 30px;
-        top: 0;
-        line-height: 30px;
-        color: #fff;
-        font-size: 12px;
-      }
-      .current-time {
-        color: #fff;
-      }
-      .remain-time {
-        color: #fff;
-      }
-      .progress {
-        position: absolute;
-        left: 130px;
-        top: 0;
-        height: 100%;
-        width: 600px;
-      }
-      .progress .progress-total {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        width: 600px;
-        height: 4px;
-        margin-top: -2px;
-        background-color: #737476;
-        border-radius: 4px;
-      }
-      .progress .progress-btn {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        width: 12px;
-        height: 6px;
-        margin-top: -3px;
-        border-radius: 6px;
-        background-color: #fff;
-        z-index: 2;
-      }
-      .progress .progress-current {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        width: 0px;
-        height: 4px;
-        margin-top: -2px;
-        background-color: #fff;
-        border-radius: 4px;
-        z-index: 1;
-      }
-      .vol {
-        position: absolute;
-        left: 752px;
-        top: 0;
-      }
-      .vol button {
-        width: 18px;
-        height: 20px;
-        background: url('/static/pc/images/video/img.png') no-repeat center;
-        background-size: cover;
-        background-position: -45px 0;
-        margin-top: 4px;
-        border: none;
-        cursor: pointer;
-      }
-      .vol button:focus {
-        outline: 0;
-      }
-      .vol .vol-progress{
-        position: absolute;
-        left: 0;
-        top: -80px;
-        height: 72px;
-        width: 18px;
-      }
-      .vol-progress-total{
-        width: 4px;
-        height: 100%;
-        margin: 0 auto;
-        background-color: #737476;
-        border-radius: 4px;
-        position: relative;
-      }
-      .vol-progress-current{
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 4px;
-        height: 0px;
-        border-radius: 4px;
-        z-index: 1;
-        background-color: #fff;
-      }
-      .vol-progress-btn{
-        position: absolute;
-        bottom: 0px;
-        left: -1px;
-        width: 6px;
-        height: 6px;
-        border-radius: 6px;
-        z-index: 1;
-        background-color: #fff;
-      }
-      .resize {
-        position: absolute;
-        left: 790px;
-        top: 0;
-      }
-      .resize button {
-        width: 20px;
-        height: 20px;
-        background: url('/static/pc/images/video/img.png') no-repeat center;
-        background-size: cover;
-        background-position: -96px 0;
-        margin-top: 4px;
-        border: none;
-        cursor: pointer;
-      }
-      .resize button:focus{
-        outline: 0;
-      }
     </style>
   </head>
   <body>
-    <div id="content">
-      <video width="100%">
-        <source
-          src="https://static.orvibo.com/guanwang_second/front/video/mixpad1080.mp4"
-          type="video/mp4"
-        />
+    <div id="video-container">
+      <video id="content" class="video-js vjs-default-skin vjs-fluid vjs-big-play-centered">
+        <source src="https://static.orvibo.com/guanwang_second/front/video/mixpad.mp4" type="video/mp4" />
       </video>
-      <div class="controls_wrap">
-        <div class="main_controls">
-          <div class="play"><button></button></div>
-          <div class="time">
-            <span class="current-time">00:05</span> <span>/</span>
-            <span class="remain-time">10:00</span>
-          </div>
-          <div class="progress">
-            <div class="progress-btn"></div>
-            <div class="progress-total">
-              <div class="progress-current"></div>
-            </div>
-          </div>
-          <div class="vol">
-            <button></button>
-            <div class="vol-progress">
-              <div class="vol-progress-total">
-                <div class="vol-progress-current"></div>
-                <div class="vol-progress-btn"></div>
-              </div>
-            </div>
-          </div>
-          <div class="resize"><button></button></div>
-        </div>
-      </div>
     </div>
     <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/static/bower_components/video.js/dist/video.js"></script>
@@ -227,6 +37,17 @@
         //   height: '600px',
         //   src: 'https://static.orvibo.com/guanwang_second/front/video/mixpad1080.mp4'
         // })
+        var player = videojs('#content', {
+          muted: true,
+          controls: true,
+          loop: false,
+          controlBar: {
+            volumeMenuButton: {
+              inline: false,
+              vertical: true
+            }
+          }
+        })
         $('.play').click(function() {
           $(this)
             .find('button')
@@ -235,10 +56,9 @@
             })
         })
         $('.vol button').click(function() {
-          $(this)
-            .css({
-              'background-position': '-72px 0'
-            })
+          $(this).css({
+            'background-position': '-72px 0'
+          })
         })
 
         var tag = false,
@@ -277,13 +97,11 @@
             } else if (left > 600) {
               left = 600
             }
-            $('.progress-btn').animate({'left': left}, 300)
+            $('.progress-btn').animate({ left: left }, 300)
             $('.progress-current').animate({ width: left }, 300)
             percent = parseInt((left / 600) * 100)
           }
         })
-
-
 
         var vtag = false,
           oy = 0,
@@ -315,15 +133,15 @@
           //鼠标点击
           if (!vtag) {
             bgheight = $('.vol-progress-total').offset().top
-            height = bgheight + 72 -e.pageY
+            height = bgheight + 72 - e.pageY
             // console.log(height);
             if (height <= 0) {
               height = 0
             } else if (height > 72) {
               height = 72
             }
-            $('.vol-progress-btn').animate({'bottom': height}, 300)
-            $('.vol-progress-current').animate({ 'height': height }, 300)
+            $('.vol-progress-btn').animate({ bottom: height }, 300)
+            $('.vol-progress-current').animate({ height: height }, 300)
             vpercent = parseInt((height / 600) * 100)
           }
         })

@@ -1,0 +1,93 @@
+/*------------------------自定义样式 PC播放器样式-------------------------*/
+#video-container .video-js .vjs-time-control{
+  display:block;
+  min-width: 0;
+  padding: 0 0.5em;
+  line-height: 8em;
+}
+#video-container .video-js .vjs-remaining-time{display: none;}
+#video-container .video-js .vjs-control-bar{
+  width: 100%;
+  padding: 0 24%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8em;
+  background: url('/static/pc/images/video/control_mask.png') repeat;
+}
+// #video-container .video-js .vjs-control:before{
+//   line-height: 4em;
+//   font-size: 2.5em
+// }
+#video-container .vjs-big-play-centered .vjs-big-play-button{
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  margin-left: -1em;
+  margin-top: -1em;
+}
+#video-container .video-js .vjs-big-play-button:before{
+  position: absolute;
+  content: '' !important;
+  display: block;
+  width: 0.6em;
+  height: 0.74em;
+  background: url(/static/pc/images/video/img.png) no-repeat center;
+  background-size: cover;
+  background-position: -26px 0;
+  top: 50%;
+  left: 50%;
+  margin-left: -0.25em;
+  margin-top: -0.37em;
+}
+#video-container .vjs-icon-play:before, #video-container .video-js .vjs-play-control:before{
+  position: absolute;
+  content: '' !important;
+  display: block;
+  width: 1em;
+  height: 1.2em;
+  background: url(/static/pc/images/video/img.png) no-repeat center;
+  background-size: cover;
+  background-position: -26px 0;
+  top: 50%;
+  left: 50%;
+  margin-left: -0.3em;
+  margin-top: -0.6em;
+
+}
+#video-container .vjs-icon-pause:before, #video-container .video-js .vjs-play-control.vjs-playing:before{
+  background: url(/static/pc/images/video/img.png) no-repeat center;
+  background-size: cover;
+  background-position: 0 0;
+}
+#video-container .vjs-icon-fullscreen-enter:before, #video-container .video-js .vjs-fullscreen-control:before{
+  position: absolute;
+  content: '' !important;
+  display: block;
+  width: 1.1em;
+  height: 1.1em;
+  background: url(/static/pc/images/video/img.png) no-repeat center;
+  background-size: cover;
+  background-position: -96px 0;
+  top: 50%;
+  left: 50%;
+  margin-left: -0.56em;
+  margin-top: -0.56em;
+}
+#video-container .vjs-icon-fullscreen-exit:before, #video-container .video-js.vjs-fullscreen .vjs-fullscreen-control:before{
+  
+  background: url(/static/pc/images/video/img.png) no-repeat center;
+  background-size: cover;
+  background-position: -116px 0;
+}
+#video-container .video-js .vjs-slider{
+  background-color: rgba(255, 255, 255, 0.4)
+}
+#video-container .vjs-menu-button-popup .vjs-menu .vjs-menu-content{
+  background-color: transparent;
+  bottom: 2.5em;
+}
+.vjs-icon-volume-high:before, .video-js .vjs-mute-control:before, .video-js .vjs-volume-menu-button:before{
+  line-height: 5.4;
+}
