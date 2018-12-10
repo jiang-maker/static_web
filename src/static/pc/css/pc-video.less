@@ -16,8 +16,11 @@
         margin-top: 139px;
         height: 60px;
       }
+      .vjs-control:before{
+        line-height: 60px;
+      }
       .vjs-play-control{
-        left: -1em;
+        left: 0;
         &:before{
           position: absolute;
           content: '' !important;
@@ -45,25 +48,21 @@
       }
       .vjs-current-time{
         display: block;
-        // left: -40px;
       }
       .vjs-time-divider{
-        display: block;    
-        // left: 140px;
-        // position: absolute;
+        display: block; 
         margin-top: 139px;
         height: 60px;
       }
       .vjs-duration{
         display: block;
-        // left: -20px;
       }
       .vjs-progress-control{
-        left: -20px;
+        // left: -20px;
       }
       .vjs-volume-menu-button{
         width: 30px;
-        left: 700px;
+        // left: 700px;
         &:before{
           position: absolute;
           top: 50%;
@@ -167,38 +166,37 @@
 // #video-container .vjs-fullscreen-control{
 //   width: 3em;
 // }
-// #video-container .vjs-icon-fullscreen-enter:before, #video-container .video-js .vjs-fullscreen-control:before{
-//   position: absolute;
-//   content: '' !important;
-//   display: block;
-//   width: 1.1em;
-//   height: 1.1em;
-//   background: url(/static/pc/images/video/img.png) no-repeat center;
-//   background-size: cover;
-//   background-position: -96px 0;
-//   top: 50%;
-//   left: 50%;
-//   margin-left: -0.56em;
-//   margin-top: -0.56em;
-// }
-// #video-container .vjs-icon-fullscreen-exit:before, #video-container .video-js.vjs-fullscreen .vjs-fullscreen-control:before{
-  
-//   background: url(/static/pc/images/video/img.png) no-repeat center;
-//   background-size: cover;
-//   background-position: -116px 0;
-// }
-// #video-container .video-js .vjs-slider{
-//   background-color: rgba(255, 255, 255, 0.4)
-// }
-// #video-container .vjs-menu-button-popup .vjs-menu .vjs-menu-content{
-//   background-color: transparent;
-// }
-// #video-container .vjs-menu-button-popup.vjs-volume-menu-button-vertical .vjs-menu {
-//   left: 0;
-//   // top: -5em;
-//   height: 8em;
-//   width: 2.9em;
-// }
+#video-container .vjs-icon-fullscreen-enter:before, #video-container .video-js .vjs-fullscreen-control:before{
+  position: absolute;
+  content: '' !important;
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url(/static/pc/images/video/img.png) no-repeat center;
+  background-size: cover;
+  background-position: -96px 0;
+  top: 50%;
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+}
+#video-container .vjs-icon-fullscreen-exit:before, #video-container .video-js.vjs-fullscreen .vjs-fullscreen-control:before{
+  background: url(/static/pc/images/video/img.png) no-repeat center;
+  background-size: cover;
+  background-position: -116px 0;
+}
+#video-container .video-js .vjs-slider{
+  background-color: rgba(255, 255, 255, 0.4)
+}
+#video-container .vjs-menu-button-popup .vjs-menu .vjs-menu-content{
+  background-color: transparent;
+}
+#video-container .vjs-menu-button-popup.vjs-volume-menu-button-vertical .vjs-menu {
+  left: 0;
+  // top: -5em;
+  height: 8em;
+  width: 2.9em;
+}
 .video-js .vjs-progress-control{
   max-width: 600px;
 }

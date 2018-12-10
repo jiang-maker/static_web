@@ -5,52 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>video封装模拟</title>
-    <link rel="stylesheet" type="text/css" href="/static/bower_components/video.js/dist/video-js.css" />
-    <link rel="stylesheet" type="text/css" href="/static/pc/css/pc-video.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/static/bower_components/video.js/dist/video-js.css"
+    />
+    
+  <!-- <link href="https://vjs.zencdn.net/7.3.0/video-js.css" rel="stylesheet"> -->
+
+  <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+  <!-- <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script> -->
+  <link rel="stylesheet" type="text/css" href="/static/pc/css/pc-video.css" />
     <style>
       * {
         margin: 0;
         padding: 0;
       }
-      /* .test{
-        margin-top: 100px;
-        margin-left: 100px;
-        width: 600px;
-        height: 600px;
-        position: relative;
-        background: #cccccc;
-      }
-      .test1{
-        position: absolute;
-        top: 100px;
-        left: 100px;
-        width: 200px;
-        height: 200px;
-        background: red;
-      }
-      .test2{
-        position: relative;
-        top: 100px;
-        width: 50px;
-        height: 50px;
-        background: #fff;
-      } */
     </style>
   </head>
   <body>
     <div id="video-container">
-      <video id="content" class="video-js vjs-default-skin vjs-fluid vjs-big-play-centered">
-        <source src="https://static.orvibo.com/guanwang_second/front/video/mixpad.mp4" type="video/mp4" />
+      <video
+        id="content"
+        class="video-js vjs-default-skin vjs-fluid vjs-big-play-centered"
+      >
+        <source
+          src="https://static.orvibo.com/guanwang_second/front/video/mixpad.mp4"
+          type="video/mp4"
+        />
       </video>
     </div>
-    <!-- <div class="test">
-      <div class="test1">
-        <div class="test2"></div>
-      </div>
-    </div> -->
     <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/static/bower_components/video.js/dist/video.min.js"></script>
-    <script src="/static/pc/js/myVideo.js"></script>
+    <script src="/static/bower_components/video.js/dist/video.js"></script>
+    <!-- <script src="https://vjs.zencdn.net/7.3.0/video.js"></script> -->
+    <!-- <script src="/static/pc/js/myVideo.js"></script> -->
     <script>
       !(function($) {
         // new MyVideo({
@@ -65,112 +53,27 @@
         //   height: '600px',
         //   src: 'https://static.orvibo.com/guanwang_second/front/video/mixpad1080.mp4'
         // })
-        var player = videojs('#content', {
+        var player = videojs('content', {
           muted: true,
           controls: true,
           loop: false,
+          // children:[
+          //   "BigPlayButton",
+          //   "PlayToggle",
+          //   "CurrentTimeDisplay",
+          //   "TimeDivider",
+          //   "DurationDisplay"
+          // ],
           controlBar: {
+            // PlayToggle: true,
+            // CurrentTimeDisplay : true,
+            // TimeDivider: true,
+            // DurationDisplay : true,
+            progressControl: true,
             volumeMenuButton: {
-              inline: false,
-              vertical: true
+              inline: false,//设置音量bar为竖直
+              vertical: true//设置音量bar为竖直
             }
-          }
-        })
-        $('.play').click(function() {
-          $(this)
-            .find('button')
-            .css({
-              'background-position': '-25px 0'
-            })
-        })
-        $('.vol button').click(function() {
-          $(this).css({
-            'background-position': '-72px 0'
-          })
-        })
-
-        var tag = false,
-          ox = 0,
-          left = 0,
-          bgleft = 0,
-          percent = 0
-        $('.progress-btn').mousedown(function(e) {
-          ox = e.pageX - left
-          tag = true
-        })
-        $(document).mouseup(function() {
-          tag = false
-        })
-        $('.progress').mousemove(function(e) {
-          //鼠标移动
-          if (tag) {
-            left = e.pageX - ox
-            if (left <= 0) {
-              left = 0
-            } else if (left > 600) {
-              left = 600
-            }
-            $('.progress-btn').css('left', left)
-            $('.progress-current').width(left)
-            percent = parseInt((left / 600) * 100)
-          }
-        })
-        $('.progress-total').click(function(e) {
-          //鼠标点击
-          if (!tag) {
-            bgleft = $('.progress-total').offset().left
-            left = e.pageX - bgleft
-            if (left <= 0) {
-              left = 0
-            } else if (left > 600) {
-              left = 600
-            }
-            $('.progress-btn').animate({ left: left }, 300)
-            $('.progress-current').animate({ width: left }, 300)
-            percent = parseInt((left / 600) * 100)
-          }
-        })
-
-        var vtag = false,
-          oy = 0,
-          height = 0,
-          bgheight = 0,
-          vpercent = 0
-        $('.vol-progress-btn').mousedown(function(e) {
-          oy = e.pageY
-          vtag = true
-        })
-        $(document).mouseup(function() {
-          vtag = false
-        })
-        $('.vol-progress').mousemove(function(e) {
-          //鼠标移动
-          if (vtag) {
-            height = oy + 72 - e.pageY
-            if (height <= 0) {
-              height = 0
-            } else if (height > 72) {
-              height = 72
-            }
-            $('.vol-progress-btn').css('bottom', height)
-            $('.vol-progress-current').height(height)
-            vpercent = parseInt((height / 72) * 100)
-          }
-        })
-        $('.vol-progress-total').click(function(e) {
-          //鼠标点击
-          if (!vtag) {
-            bgheight = $('.vol-progress-total').offset().top
-            height = bgheight + 72 - e.pageY
-            // console.log(height);
-            if (height <= 0) {
-              height = 0
-            } else if (height > 72) {
-              height = 72
-            }
-            $('.vol-progress-btn').animate({ bottom: height }, 300)
-            $('.vol-progress-current').animate({ height: height }, 300)
-            vpercent = parseInt((height / 600) * 100)
           }
         })
       })(jQuery)
