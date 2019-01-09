@@ -1,9 +1,9 @@
 var    gulp         = require('gulp');
 var    $            = require('gulp-load-plugins')();
 var    runSq        = require('run-sequence');
-var    browserSync  = require('browser-sync');
 var    minimist     = require('minimist');
 
+var   openURL       = require("open");
 var    envOpt          = minimist(process.argv.slice(2));
 console.log(envOpt.env);  //npm script params, product-env or test-env
 
@@ -107,26 +107,27 @@ gulp.task('clean:test', function () {
 gulp.task('watch',function () {
   $.watch(baseDir.root + '/**/*.html',function() {
     runSq('html:test',function(){  
-      browserSync.reload();
+      $.connect.reload();
     })
   })
   $.watch(baseDir.root + '/static/**/*', function () {
     runSq('copy:test',function () {
-      browserSync.reload();
+      $.connect.reload();
     })
   })
 })
-gulp.task('browser-sync', function () {
-  browserSync.init({
-      files:['**'],
-      server:{
-          baseDir:'./test',  // 设置服务器的根目录
-          index:'index.html' // 指定默认打开的文件
-      },
-      port:8090  // 指定访问服务器的端口号
+gulp.task('start:server', function () {
+  $.connect.server({
+    root: baseDir.test,
+    livereload: true,
+    port: 9080,
+    host: '0.0.0.0'
   });
+});
+gulp.task("open", ['start:server'], function () {
+  openURL('http://localhost:9080')
 });
 
 gulp.task('test',['copy:test'], function () {
-  runSq('browser-sync','watch')
+  runSq('open','watch')
 })

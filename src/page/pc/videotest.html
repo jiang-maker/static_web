@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>video封装模拟</title>
-    <link
+    <!-- <link
       rel="stylesheet"
       type="text/css"
       href="/static/bower_components/video.js/dist/video-js.css"
-    />
+    /> -->
     
-  <!-- <link href="https://vjs.zencdn.net/7.3.0/video-js.css" rel="stylesheet"> -->
+  <link href="https://vjs.zencdn.net/7.3.0/video-js.css" rel="stylesheet">
 
   <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
   <!-- <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script> -->
-  <link rel="stylesheet" type="text/css" href="/static/pc/css/pc-video.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="/static/pc/css/pc-video.css" /> -->
     <style>
       * {
         margin: 0;
@@ -26,8 +26,8 @@
   <body>
     <div id="video-container">
       <video
-        id="content"
-        class="video-js vjs-default-skin vjs-fluid vjs-big-play-centered"
+        id="player"
+        class="video-js vjs-default-skin vjs-big-play-centered"
       >
         <source
           src="https://static.orvibo.com/guanwang_second/front/video/mixpad.mp4"
@@ -36,47 +36,110 @@
       </video>
     </div>
     <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/static/bower_components/video.js/dist/video.js"></script>
-    <!-- <script src="https://vjs.zencdn.net/7.3.0/video.js"></script> -->
+    <!-- <script src="/static/bower_components/video.js/dist/video.js"></script> -->
+    <script src="https://vjs.zencdn.net/7.3.0/video.js"></script>
     <!-- <script src="/static/pc/js/myVideo.js"></script> -->
     <script>
       !(function($) {
-        // new MyVideo({
-        //   id: 'content',
-        //   width: '100%',
-        //   height: '600px',
-        //   src: 'https://static.orvibo.com/guanwang_second/front/video/mixpad1080.mp4"'
-        // })
-        // $('#content').MyVideo({
-        //   id: '#content',
-        //   width: '100%',
-        //   height: '600px',
-        //   src: 'https://static.orvibo.com/guanwang_second/front/video/mixpad1080.mp4'
-        // })
-        var player = videojs('content', {
-          muted: true,
-          controls: true,
-          loop: false,
-          // children:[
-          //   "BigPlayButton",
-          //   "PlayToggle",
-          //   "CurrentTimeDisplay",
-          //   "TimeDivider",
-          //   "DurationDisplay"
-          // ],
-          controlBar: {
-            // PlayToggle: true,
-            // CurrentTimeDisplay : true,
-            // TimeDivider: true,
-            // DurationDisplay : true,
-            progressControl: true,
-            volumeMenuButton: {
-              inline: false,//设置音量bar为竖直
-              vertical: true//设置音量bar为竖直
+        var options = {
+          'autoplay': false,
+          'controls': true,
+          'height': 300,
+          'width': 600,
+          'loop': false,
+          'muted': true,
+          'poster': '',
+          'preload': true,
+          'children':{
+            // 'bigPlayButton' : true,
+            // 'textTrackDisplay' : false,
+            // 'posterImage': false,
+            // 'errorDisplay' : false,
+            // 'controlBar' : {
+            //     captionsButton : false,
+            //     chaptersButton: false,
+            //     subtitlesButton:false,
+            //     liveDisplay:false,
+            //     playbackRateMenuButton:false,
+            //     FullscreenToggle:false,
+            //     volumeMenuButton: {
+            //       inline: false,//设置音量bar为竖直
+            //       vertical: true//设置音量bar为竖直
+            //     }
+            // }
+            "controlBar": { 
+              "children": { 
+                "volumeMenuButton": true, 
+                "muteToggle": false, 
+                "volumeControl": false // displays volume control bar atop button
+              }
+            }
+            
+          }
+        }
+        var setup = {
+          "techOrder" : ['html5', 'flash'],
+          "controls": true,
+          "preload": "auto",
+          "children": { 
+            "controlBar": { 
+              "children": { 
+                "volumeMenuButton": true, 
+                "muteToggle": false, 
+                "volumeControl": false // displays volume control bar atop button
+              }
             }
           }
+        };
+
+        var player = videojs('player',setup,function () {
+          // console.log('object');
+          var myPlayer = this;
+
+          player.play();
         })
+        // var player = videojs('content', {
+        //   muted: true,
+        //   controls: true,
+        //   loop: false,
+        //   controlBar: {
+        //     progressControl: true,
+        //     volumeMenuButton: {
+        //       inline: false,//设置音量bar为竖直
+        //       vertical: true//设置音量bar为竖直
+        //     }
+        //   }
+        // })
       })(jQuery)
+    </script>
+    <div id="allmap" style="display:none;"></div>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=XkZtAn4nYD0pkEs7EAUaB8eYmiDGaBmR&s=1"></script>
+    <script type="text/javascript">
+      // 百度地图API功能
+      var positon = {
+        lng:0,
+        lat:0
+      }
+      // 百度地图API功能
+      var map = new BMap.Map("allmap");
+      var point = new BMap.Point(116.331398,39.897445);
+      map.centerAndZoom(point,12);
+      // 新建位置信息用于获取经纬度
+      var geolocation = new BMap.Geolocation();
+      // 新建地址解析
+      var geoc = new BMap.Geocoder();
+      geolocation.getCurrentPosition(function(r){
+        if(this.getStatus() == BMAP_STATUS_SUCCESS){
+          // 将经纬度转换为地址
+          geoc.getLocation(r.point, function(rs){
+            var addComp = rs.addressComponents;
+            alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+          });
+        }
+        else {
+          alert('failed'+this.getStatus());
+        }        
+      },{enableHighAccuracy: true})
     </script>
   </body>
 </html>

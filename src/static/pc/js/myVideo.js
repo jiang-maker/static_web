@@ -24,9 +24,6 @@
       width:obj.width,
       loop : false,
     })
-    // $(obj.id).append("<video width='"+ obj.width+"'"+"height="+obj.height+">"+
-    //                   "<source src='"+ obj.src +"' type='video/mp4'>"+
-    //                 +"</video>");
   }
   var defaults = {
     id: undefined,          //视频容器  id
