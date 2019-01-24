@@ -1,0 +1,23 @@
+.center-block(@width:1200px){
+  display: block;
+  width: @width;
+  margin-left: auto;
+  margin-right: auto;
+}
+.size(@width; @height) {
+  width: @width;
+  height: @height;
+}
+
+.square(@size) {
+  .size(@size; @size);
+}
+.center-absolute( @width, @height ){
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: @width;
+  height: @height;
+  margin-left: -(@width/2);
+  margin-top: -(@height/2);
+}

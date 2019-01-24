@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+  <script>
+    !(function ($) {
+      function getCookie(name)
+      {
+          var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+          if(arr=document.cookie.match(reg))
+              return (arr[2]);
+          else
+              return null;
+      }
+      //删除cookies
+      function delCookie(name)
+      {
+        var exp = new Date();
+        exp.setTime(exp.getTime() - 1000);
+        var cval=getCookie(name);
+        if(cval!=null){
+            document.cookie= name + "=" + cval + ";expires=" + exp.toGMTString()+";path=/";
+        }
+      }
+      delCookie('MCPopupClosed');
+    })(jQuery)
+  </script>
+    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+    <script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us20.list-manage.com","uuid":"f226bd63f6318feabf09f4f08","lid":"1129111d46","uniqueMethods":true}) })</script>
+</body>
+</html>

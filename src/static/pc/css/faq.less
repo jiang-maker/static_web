@@ -1,0 +1,93 @@
+.clear:after {
+  content: " ";
+  display: block; 
+  clear: both; 
+  height: 0;
+}
+.clear {zoom: 1;}
+.main-content{
+  width: 100%;
+  padding-top: 60px;
+  background-color: #fff;
+  .menu{
+    float: left;
+    margin-left: 60px;
+    width: 300px;
+    height: auto;
+    border: 1px solid #eee;
+    border-bottom: none;
+    &>div{
+      height: 60px;
+      border-bottom: 1px solid #eee;
+      background-color: #cccccc;
+      &.selected{
+        background-color: #eee;
+      }
+      a{
+        display: block;
+        height: 60px;
+        line-height: 60px;
+        text-decoration: none;
+        padding-left: 20px;
+        color: #111111;
+      }
+      &:hover{
+        background-color: #eee;
+      }
+    }
+  }
+  .content{
+    float: left;
+    width: 800px;
+    height: 600px;
+    margin-left: 30px;
+    background-color: #f7f7f7;
+    position: relative;
+    div.active{
+      display: block;
+    }
+    .content1{
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+      .sub-menu{
+        padding: 10px;
+        div{
+          display: inline-block;
+          padding-bottom: 10px;
+          border-bottom: 4px solid #0d7fef;
+          cursor: pointer;
+          &.sub-menu-active{
+            background-color: #fff;
+          }
+        }
+      }
+      .sub-content{
+        width: 100%;
+        position: relative;
+        &>div{
+          position: absolute;
+          top: 0;
+          left: 0;
+          display: none;
+          &.sub-content-active{
+            display: block;
+          }
+        }
+      }
+    }
+    .content2{
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+    }
+    .content3{
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+    }
+  }
+}
