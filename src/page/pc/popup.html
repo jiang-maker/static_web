@@ -1,37 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
-  <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
-  <script>
-    !(function ($) {
-      function getCookie(name)
-      {
-          var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-          if(arr=document.cookie.match(reg))
-              return (arr[2]);
-          else
-              return null;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .btn1{
+        display: block;
+        width: 100px;
+        height: 60px;
+        background-color: #cccccc;
       }
-      //删除cookies
-      function delCookie(name)
-      {
-        var exp = new Date();
-        exp.setTime(exp.getTime() - 1000);
-        var cval=getCookie(name);
-        if(cval!=null){
-            document.cookie= name + "=" + cval + ";expires=" + exp.toGMTString()+";path=/";
+      .btn2{
+        display: block;
+        margin-top: 20px;
+        width: 100px;
+        height: 60px;
+        background-color: #c7b48a;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#" data-uuid="f226bd63f6318feabf09f4f08" data-lid="1129111d46" class="btn btn1">弹窗1</a>
+    <a href="#" data-uuid="bd669d3b461e9bcbb4eac69a2" data-lid="761d98b1a4" class="btn btn2">弹窗2</a>
+    <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+    <script>
+      !(function($) {
+        function getCookie(name) {
+          var arr,
+            reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)')
+          if ((arr = document.cookie.match(reg))) return arr[2]
+          else return null
         }
-      }
-      delCookie('MCPopupClosed');
-    })(jQuery)
-  </script>
-    <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
-    <script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us20.list-manage.com","uuid":"f226bd63f6318feabf09f4f08","lid":"1129111d46","uniqueMethods":true}) })</script>
-</body>
+        //删除cookies
+        function delCookie(name) {
+          var exp = new Date()
+          exp.setTime(exp.getTime() - 1000)
+          var cval = getCookie(name)
+          if (cval != null) {
+            document.cookie =
+              name + '=' + cval + ';expires=' + exp.toGMTString() + ';path=/'
+          }
+        }
+        delCookie('MCPopupClosed');
+        $('.btn').click(function () {
+          delCookie('MCPopupClosed');
+          var $uuid = $(this).attr('data-uuid');
+          var $lid = $(this).attr('data-lid');
+          window.dojoRequire(['mojo/signup-forms/Loader'], function(L) {
+            L.start({
+              baseUrl: 'mc.us20.list-manage.com',
+              uuid: $uuid,
+              lid: $lid,
+              uniqueMethods: true
+            })
+          })
+        })
+      })(jQuery)
+    </script>
+    <script
+      type="text/javascript"
+      src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js"
+      data-dojo-config="usePlainJson: true, isDebug: false"
+    ></script>
+  </body>
 </html>
